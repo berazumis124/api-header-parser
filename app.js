@@ -13,7 +13,7 @@ app.get('*', function(req, res){
     var accept = accepts(req);
     //console.log(accept.language()[0]);
     //console.log(req.connection.remoteAddress);
-    resJson.ipaddress = req.connection.remoteAddress;
+    resJson.ipaddress = req.headers['x-forwarded-for'].split(",")[0];
     resJson.os = ua.os;
     resJson.language = accept.language()[0];
     res.status(200).json(resJson);
